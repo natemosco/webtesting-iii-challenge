@@ -19,11 +19,21 @@ test('state is unlocked and open', () => {
 //BUT... How do you make it based on a snapshot === onLoad?
 
 test("cannot be closed or opened if it is locked", async () => {
-    const { findByText, getByText, queryByText } = render(<Dashboard />);
+    const { getByText } = render(<Dashboard />);
 
     const button1 = getByText("Close Gate");
     const button2 = getByText("Lock Gate");
     fireEvent.click(button1);
     await fireEvent.click(button2);
     expect(button1.disabled).toBe(true);
+})
+
+test("shows the controls and display", () => {
+    const { getByText } = render(<Dashboard />);
+    const display = getByText("Unlocked");
+    const controls = getByText("Lock Gate");
+
+    expect(display && controls).toBeDefined();
+
+
 })
