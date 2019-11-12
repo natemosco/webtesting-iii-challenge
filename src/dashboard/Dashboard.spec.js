@@ -34,6 +34,4 @@ test("shows the controls and display", () => {
     const controls = getByText("Lock Gate");
 
     expect(display && controls).toBeDefined();
-
-
 })
