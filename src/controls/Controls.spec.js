@@ -29,12 +29,12 @@ test("button text changes based on current state", async () => {
 })
 
 
-test("cannot be closed or opened if it is locked", async () => {
+test("cannot be locked or unlocked if it is open", async () => {
     const { getByText } = render(<Dashboard />);
 
     const button1 = getByText("Close Gate");
     const button2 = getByText("Lock Gate");
+    expect(button2.disabled).toBe(true);
     fireEvent.click(button1);
-    await fireEvent.click(button2);
-    expect(button1.disabled).toBe(true);
+    await expect(button2.disabled).toBe(false);
 })
