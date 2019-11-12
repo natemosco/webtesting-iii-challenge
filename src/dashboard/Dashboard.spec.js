@@ -1,6 +1,6 @@
 // Test away
 import React from "react";
-import { render } from "@testing-library/react"
+import { render, fireEvent } from "@testing-library/react"
 import Dashboard from "./Dashboard";
 
 test("app renders correctly", () => {
@@ -18,3 +18,12 @@ test('state is unlocked and open', () => {
 })
 //BUT... How do you make it based on a snapshot === onLoad?
 
+test("cannot be closed or opened if it is locked", async () => {
+    const { findByText, getByText, queryByText } = render(<Dashboard />);
+
+    const button1 = getByText("Close Gate");
+    const button2 = getByText("Lock Gate");
+    fireEvent.click(button1);
+    await fireEvent.click(button2);
+    expect(button1.disabled).toBe(true);
+})
